@@ -4,13 +4,13 @@ import { auth, db, uploadImageToFirebaseStorage } from './firebase-config'
 
 const Chat = ({room}) => {
     const [message,setMessage] = useState("")
-    const messageRef = collection(db,"messages")
+    const messageRef = collection(db,room)
     const [messages,setMessages] = useState([])
     const [img,setImg] = useState(null)
 
 
     useEffect(()=>{
-        const queryMessage = query(messageRef,where("room","==",room),orderBy("createdAt"))
+        const queryMessage = query(messageRef,orderBy("createdAt"))
        const unsubscribe = onSnapshot(queryMessage,(snapshot)=>{
             let messages = []
             snapshot.forEach(doc => messages.push({...doc.data(),id:doc.id,}))
