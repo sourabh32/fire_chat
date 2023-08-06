@@ -1,24 +1,20 @@
-import { signInWithPopup } from 'firebase/auth'
+
 import React from 'react'
-import { auth, provider } from './firebase-config'
-import Cookies from 'universal-cookie'
-const cookies = new Cookies()
-const Auth = ({set}) => {
+import { signInWithGoogle } from './firebase-functions'
+
+
+const Auth = () => {
     
-    const signInWithGoogle =  async () =>{
-        try {
-            const res = await signInWithPopup(auth,provider);
-            cookies.set("auth-token",res.user.refreshToken)
-            set(true)
-        } catch (error) {
-            console.log(error)
-        }
-        
-    }
   return (
-    <div>
-        <button onClick={signInWithGoogle}>google</button>
+    <div className="auth-container">
+    <div className="auth-card">
+      <h2>Welcome to My Chat App</h2>
+      <p>Sign in to start chatting</p>
+      <button className="google-button" onClick={signInWithGoogle}>
+        Sign in with Google
+      </button>
     </div>
+  </div>
   )
 }
 

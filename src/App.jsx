@@ -1,27 +1,50 @@
-import { useRef, useState } from "react"
+import { useContext, useRef, useState } from "react"
 import Auth from "./Auth"
-import Cookies from 'universal-cookie'
+
 import Chat from "./Chat"
-const cookies = new Cookies()
+import { userContext } from "./contexts/UserContext"
+import { handleAddRoom, logOut } from "./firebase-functions"
+
 
 function App() {
-const [isAuth,setAuth] = useState(cookies.get("auth-token"))
+const {user} = useContext(userContext)
 const [room,setRoom] = useState("")
+console.log(user)
 console.log(room)
-  const InputRef = useRef(null)
+const InputRef = useRef(null)
+const handleRoomSubmit = async () =>{
+  setRoom(InputRef.current.value)
+  await handleAddRoom(room,user)
+}
+  
 
-      if(!isAuth){
-        return(<Auth  set={setAuth} />)
+      if(!user){
+        return(<Auth  />)
       }
       else{
       return(
-        <div>
-          {room ? (<Chat room={room} />):(<div>
-            <label>enter room no</label>
-            <input ref={InputRef} />
-            <button onClick={()=> setRoom(InputRef.current.value)}>enter room</button>
-            </div>) }
+        <div className="main-container">
+      {room ? (
+        <div className="chat-container">
+          <Chat room={room} />
+          <button className="logout-button" onClick={logOut}>
+            Log Out
+          </button>
         </div>
+      ) : (
+        <div className="room-selection">
+          <h2>Welcome to My Chat App</h2>
+          <label>Enter room number:</label>
+          <input className="room-input" ref={InputRef} />
+          <button className="enter-button" onClick={handleRoomSubmit}>
+            Enter Room
+          </button>
+          <button className="logout-button" onClick={logOut}>
+            Log Out
+          </button>
+        </div>
+      )}
+    </div>
       )
           }
     

@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, where } from 'firebase/firestore'
+import React, { useContext, useEffect, useState } from 'react'
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, } from 'firebase/firestore'
 import { auth, db, uploadImageToFirebaseStorage } from './firebase-config'
+import { userContext } from './contexts/UserContext'
+
 
 const Chat = ({room}) => {
     const [message,setMessage] = useState("")
     const messageRef = collection(db,room)
     const [messages,setMessages] = useState([])
     const [img,setImg] = useState(null)
-
-
+   const {name} = useContext(userContext)
+console.log(name)
     useEffect(()=>{
         const queryMessage = query(messageRef,orderBy("createdAt"))
        const unsubscribe = onSnapshot(queryMessage,(snapshot)=>{
@@ -28,7 +30,7 @@ const Chat = ({room}) => {
         text:message,
         createdAt:serverTimestamp(),
         user:auth.currentUser.displayName,
-        room,
+        
        type:"img",
        imgUrl
        })

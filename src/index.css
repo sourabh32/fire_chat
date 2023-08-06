@@ -88,3 +88,89 @@
   }
   
   
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  .auth-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .auth-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .auth-card p {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .google-button {
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .google-button:hover {
+    background-color: #357ae8;
+  }
+  .main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  .chat-container,
+  .room-selection {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .room-selection h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .room-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+  .enter-button,
+  .logout-button {
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .enter-button:hover,
+  .logout-button:hover {
+    background-color: #357ae8;
+  }
+  
