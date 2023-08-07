@@ -5,6 +5,10 @@ import Chat from "./Chat"
 import { userContext } from "./contexts/UserContext"
 import { handleAddRoom, logOut } from "./firebase-functions"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
+import AuthenticationPage from "./pages/Authentication"
+import Header from "./Header"
+import HomePage from "./pages/Home"
+import ChatProvider from "./contexts/ChatContext"
 
 
 function App() {
@@ -21,10 +25,12 @@ const handleRoomSubmit = async () =>{
 
 return (
   <BrowserRouter>
+  <Header />
   <Routes>
-    <Route path ="/" element={<Home />} />
-    <Route path ="/room/:id" element={<Chat />} />
-    <Route path ="/auth" element={<Authentication />} />
+    <Route path ="/" element={<AuthenticationPage />} />
+  
+    <Route path ="/auth" element={<HomePage />} />
+   
   </Routes>
   </BrowserRouter>
 )
