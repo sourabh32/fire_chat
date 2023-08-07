@@ -4,6 +4,7 @@ import Auth from "./Auth"
 import Chat from "./Chat"
 import { userContext } from "./contexts/UserContext"
 import { handleAddRoom, logOut } from "./firebase-functions"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 
 function App() {
@@ -16,37 +17,48 @@ const handleRoomSubmit = async () =>{
   setRoom(InputRef.current.value)
   await handleAddRoom(InputRef.current.value,user.uid)
 }
+
+
+return (
+  <BrowserRouter>
+  <Routes>
+    <Route path ="/" element={<Home />} />
+    <Route path ="/room/:id" element={<Chat />} />
+    <Route path ="/auth" element={<Authentication />} />
+  </Routes>
+  </BrowserRouter>
+)
   
 
-      if(!user){
-        return(<Auth  />)
-      }
-      else{
-      return(
-        <div className="main-container">
-      {room ? (
-        <div className="chat-container">
-          <Chat room={room} />
-          <button className="logout-button" onClick={logOut}>
-            Log Out
-          </button>
-        </div>
-      ) : (
-        <div className="room-selection">
-          <h2>Welcome to My Chat App</h2>
-          <label>Enter room number:</label>
-          <input className="room-input" ref={InputRef} />
-          <button className="enter-button" onClick={handleRoomSubmit}>
-            Enter Room
-          </button>
-          <button className="logout-button" onClick={logOut}>
-            Log Out
-          </button>
-        </div>
-      )}
-    </div>
-      )
-          }
+    //   if(!user){
+    //     return(<Auth  />)
+    //   }
+    //   else{
+    //   return(
+    //     <div className="main-container">
+    //   {room ? (
+    //     <div className="chat-container">
+    //       <Chat room={room} />
+    //       <button className="logout-button" onClick={logOut}>
+    //         Log Out
+    //       </button>
+    //     </div>
+    //   ) : (
+    //     <div className="room-selection">
+    //       <h2>Welcome to My Chat App</h2>
+    //       <label>Enter room number:</label>
+    //       <input className="room-input" ref={InputRef} />
+    //       <button className="enter-button" onClick={handleRoomSubmit}>
+    //         Enter Room
+    //       </button>
+    //       <button className="logout-button" onClick={logOut}>
+    //         Log Out
+    //       </button>
+    //     </div>
+    //   )}
+    // </div>
+    //   )
+    //       }
     
     
     
