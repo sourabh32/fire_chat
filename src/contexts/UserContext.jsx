@@ -1,7 +1,8 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 import { fetchUserFromFirestore } from "../firebase-functions";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 
 
 export const userContext = createContext()
@@ -12,23 +13,23 @@ export const UserProvider = ({children})=>{
     const [user,setUser] = useState(null)
 console.log("render")
 
-    // console.log(user.uid)
+   
  
-    useEffect(()=>{
-        const unsubscribe =  onAuthStateChanged(auth,async (currentUser)=>{
-            if(currentUser){
-                console.log(currentUser)
-                const user = await fetchUserFromFirestore(currentUser.uid)
-                console.log(user)
-               setUser(user)
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+          if (currentUser) {
+              const unsubscribeListener = await fetchUserFromFirestore(currentUser.uid,setUser)
+              return () => unsubscribeListener();
             }
-            else{
-                setUser(null)
-            }
-            
-        })
+            else {
+                setUser(null);
+              }
+          } 
+        );
+      
         return () => unsubscribe();
-    },[])
+      }, []);
+      
     const value = {name:"sourabh",user}
     return(
         <userContext.Provider value={value}>

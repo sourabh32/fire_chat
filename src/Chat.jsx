@@ -10,6 +10,8 @@ const Chat = ({room}) => {
     const [messages,setMessages] = useState([])
     const [img,setImg] = useState(null)
    const {name} = useContext(userContext)
+
+   
 console.log(name)
     useEffect(()=>{
         const queryMessage = query(messageRef,orderBy("createdAt"))

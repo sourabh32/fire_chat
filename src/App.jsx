@@ -14,7 +14,7 @@ console.log(room)
 const InputRef = useRef(null)
 const handleRoomSubmit = async () =>{
   setRoom(InputRef.current.value)
-  await handleAddRoom(room,user)
+  await handleAddRoom(InputRef.current.value,user.uid)
 }
   
 
