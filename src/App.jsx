@@ -17,10 +17,7 @@ const {user} = useContext(userContext)
 console.log(user)
 
 // const InputRef = useRef(null)
-// const handleRoomSubmit = async () =>{
-//   setRoom(InputRef.current.value)
-//   await handleAddRoom(InputRef.current.value,user.uid)
-// }
+
 
 
 return (
@@ -29,7 +26,7 @@ return (
   <Routes>
     <Route path ="/" element={<AuthenticationPage />} />
   
-    {/* <Route path ="/room/:id" element={<Chat />} /> */}
+    <Route path ="/room/:id" element={<Chat />} />
     <Route path ="/auth" element={<HomePage />} />
    
   </Routes>
