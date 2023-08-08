@@ -8,51 +8,45 @@ import {
   Divider,
   Text,
   Input,
+  HStack,
 } from "@chakra-ui/react";
 import { userContext } from "../contexts/UserContext";
 import { chatContext } from "../contexts/ChatContext";
 import { addDoc, serverTimestamp } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import Chat from "./Chat";
+import MemoizedChat from "./Chat";
+
+
 
 function HomePage() {
-  const { selectedRoom, setSelectedRoom, messageRef, messages } =
+  const { selectedRoom, setSelectedRoom,messages } =
     useContext(chatContext);
 
   console.log("render");
-  const InputRef = useRef("");
+ 
   const { user } = useContext(userContext);
 
-  console.log(messages);
-  console.log(selectedRoom);
+  // console.log(messages);
+  // console.log(selectedRoom);
 
   const handleRoomClick = (room) => {
     setSelectedRoom(room);
-    // Fetch messages for the selected room from your backend
-    // Example:
-    // const messages = fetchMessagesForRoom(roomId);
-    // setMessages(messages);
+    
   };
 
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    await addDoc(messageRef, {
-      text: InputRef.current.value,
-      createdAt: serverTimestamp(),
-      user: user.displayName,
-
-      type: "text",
-    });
-    // InputRef.current.value = "";
-  };
+ 
 
   return (
     <Container minHeight="90vh" minW="100vw">
-      <Flex p={4} height="100vh">
-        <Box width="25%" p={4} borderWidth={1} borderRadius="md">
+     <HStack>
+        <Box width="50%" p={4} borderWidth={1} borderRadius="md">
           <Text fontWeight="bold">Rooms</Text>
           <Button>Add Room</Button>
           <VStack maxH={"70vh"} spacing="5" overflowY={"scroll"}>
             {user &&
               user.chatRooms.map((room) => (
+               
                 <Button
                   key={room}
                   onClick={() => handleRoomClick(room)}
@@ -60,32 +54,13 @@ function HomePage() {
                 >
                   {room}
                 </Button>
+               
               ))}
           </VStack>
         </Box>
-        <Divider orientation="vertical" />
-        <Box flex="1" p={4}>
-          <VStack spacing={2} align="stretch">
-            <Box p={2} borderWidth={1} borderRadius="md" minHeight="300px">
-              <h1>{selectedRoom}</h1>
-              {/* Display messages here */}
-              {messages.length > 0 &&
-                messages.map((message) => (
-                  <Box key={message.id} p={2} bg="gray.100" borderRadius="md">
-                    <Text>{message.user}</Text>
-                    <Text>{message.text}</Text>
-                  </Box>
-                ))}
-            </Box>
-            <Input
-              ref={InputRef}
-              //   onChange={(e) => setNewMessage(e.target.value)}
-              placeholder="Type your message..."
-            />
-            <Button onClick={handleSendMessage}>Send</Button>
-          </VStack>
-        </Box>
-      </Flex>
+        
+<MemoizedChat messages={messages} />
+      </HStack>
     </Container>
   );
 }

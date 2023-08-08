@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react"
 import Auth from "./Auth"
 
-import Chat from "./Chat"
+import Chat from "./pages/Chat"
 import { userContext } from "./contexts/UserContext"
 import { handleAddRoom, logOut } from "./firebase-functions"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
@@ -13,14 +13,14 @@ import ChatProvider from "./contexts/ChatContext"
 
 function App() {
 const {user} = useContext(userContext)
-const [room,setRoom] = useState("")
+
 console.log(user)
-console.log(room)
-const InputRef = useRef(null)
-const handleRoomSubmit = async () =>{
-  setRoom(InputRef.current.value)
-  await handleAddRoom(InputRef.current.value,user.uid)
-}
+
+// const InputRef = useRef(null)
+// const handleRoomSubmit = async () =>{
+//   setRoom(InputRef.current.value)
+//   await handleAddRoom(InputRef.current.value,user.uid)
+// }
 
 
 return (
@@ -29,6 +29,7 @@ return (
   <Routes>
     <Route path ="/" element={<AuthenticationPage />} />
   
+    {/* <Route path ="/room/:id" element={<Chat />} /> */}
     <Route path ="/auth" element={<HomePage />} />
    
   </Routes>

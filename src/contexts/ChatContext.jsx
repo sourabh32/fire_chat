@@ -11,20 +11,22 @@ export const chatContext = createContext()
 
 
 export const ChatProvider = ({children})=>{
-    const [selectedRoom,setSelectedRoom] = useState("z")
+    const [selectedRoom,setSelectedRoom] = useState("undefined")
     const [messages,setMessages] = useState([])
     const messageRef = collection(db,selectedRoom)
 
 
     useEffect(()=>{
-        if(selectedRoom !== "z"){
+        if(selectedRoom !== "undefined"){
+            
         const queryMessage = query(messageRef,orderBy("createdAt"))
-       const unsubscribe = onSnapshot(queryMessage,(snapshot)=>{
-            let messages = []
-            snapshot.forEach(doc => messages.push({...doc.data(),id:doc.id,}))
-            setMessages(messages)
+       const unsubscribe =  onSnapshot(queryMessage, async(snapshot)=>{
+            let newMessages = []
+             snapshot.forEach(doc => newMessages.push({...doc.data(),id:doc.id,}))
+            setMessages(newMessages)
             // console.log(messages)
-        })
+        }
+        )
         return ()=> unsubscribe();
         }
     },[selectedRoom])

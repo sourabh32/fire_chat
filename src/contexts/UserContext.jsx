@@ -30,7 +30,7 @@ console.log("render")
         return () => unsubscribe();
       }, []);
       
-    const value = {name:"sourabh",user}
+    const value = {user}
     return(
         <userContext.Provider value={value}>
             {children}

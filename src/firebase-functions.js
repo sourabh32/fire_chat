@@ -78,12 +78,14 @@ export const fetchUserFromFirestore = async (uid,setUser) => {
     const userDocRef = doc(db, "users", uid);
     const userDocSnapshot = await getDoc(userDocRef);
     
-    if(userDocSnapshot.exists){
-      setUser(userDocSnapshot.data())
-    }
+    if(userDocSnapshot.exists()){
+      
+    
     const unsubscribe =  onSnapshot(userDocRef,(snapshot)=> setUser(snapshot.data())
     )
     return () => unsubscribe()
+  }
+    
   } catch (error) {
     console.log("User document does not exist.");
   }
