@@ -17,77 +17,43 @@ import { Link, useNavigate } from "react-router-dom";
 import Chat from "./Chat";
 import MemoizedChat from "./Chat";
 import { handleAddRoom } from "../firebase-functions";
+import CreateRoom from "../Components/CreateRoom";
+import RoomsContainer from "../Components/RoomsContainer";
 
 
 
 function HomePage() {
-  const { selectedRoom, setSelectedRoom,messages } =
-    useContext(chatContext);
+  
 
-  console.log("render");
+  
  
   const { user } = useContext(userContext);
 
-  // console.log(messages);
-  // console.log(selectedRoom);
-const InputRef = useRef("")
-  const handleRoomClick = (room) => {
-    setSelectedRoom(room);
-    
-  };
-  const navigate = useNavigate()
-const handleRoomSubmit = async () =>{
-  const val = InputRef.current.value
- setSelectedRoom(val)
- navigate(`/room/${val}`)
-  await handleAddRoom(val,user.uid)
-}
+  
+
+  
+
  
 
   return (
-    <Container minHeight="90vh" minW="100vw" display="flex" alignItems="center" justifyContent="center">
-    <Box my="3" width={["90%","50%"]} p={4} borderWidth={1} borderRadius="md">
-      <Text fontWeight="bold" fontSize="xl" mb={4}>
-        Rooms
-      </Text>
-      <div className="room-selection">
-        <Text fontSize="xl" fontWeight="bold" mb={4}>
-          Welcome to My Chat App
-        </Text>
-        <label htmlFor="room-input">Enter room number:</label>
-        <Input
-          id="room-input"
-          className="room-input"
-          ref={InputRef}
-          size="md"
-          mb={2}
-          placeholder="Room Number"
-        />
-        <Button
-          className="enter-button"
-          onClick={handleRoomSubmit}
-          colorScheme="teal"
-          size="md"
-        >
-          Enter Room
-        </Button>
-      </div>
-      <VStack maxH="70vh" spacing={5} overflowY="scroll">
-        {user &&
-          user.chatRooms.map((room) => (
-            <Link to={`/room/${room}`} key={room}>
-              <Button
-                onClick={() => handleRoomClick(room)}
-                variant={selectedRoom === room.id ? "solid" : "outline"}
-                size="md"
-              >
-                {room}
-              </Button>
-            </Link>
-          ))}
-      </VStack>
-    </Box>
-  </Container>
+    <Container p="10" maxW="container.lg">
+   
+      <VStack  justifyContent={"center"} 
+      alignItems={"center"} w="100%" height={["15vh","25vh"]} border="2px dashed #ccc" borderRadius="md">
+      <Text>Add Room</Text>
+   <CreateRoom user={user} />
+  </VStack>
+  <Box my="10"
+  p="5"
+  w="100%" border="2px solid #ccc" borderRadius="md"
+  >
+    <Text textAlign={"center"}>Previous Room's</Text>
+    <RoomsContainer user={user} />
+
+  </Box>
+     
+     
+    </Container>
   );
 }
 
