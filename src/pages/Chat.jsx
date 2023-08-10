@@ -1,4 +1,4 @@
-import { Box, Button, Input, VStack ,Text, Container, Flex} from '@chakra-ui/react'
+import { Box, Button, Input, VStack ,Text, Container, Flex, Heading} from '@chakra-ui/react'
 import React, { useContext, useEffect, useRef } from 'react'
 import { chatContext } from '../contexts/ChatContext'
 import { addDoc, serverTimestamp } from 'firebase/firestore'
@@ -13,7 +13,8 @@ const Chat = () => {
     console.log("render");
     const InputRef = useRef("");
     const messagesEndRef = useRef(null);
-  
+    
+
     useEffect(() => {
      
       if (messagesEndRef.current) {
@@ -27,7 +28,7 @@ const Chat = () => {
         await addDoc(messageRef, {
           text: InputRef.current.value,
           createdAt: serverTimestamp(),
-          user: user.displayName,
+          sender: user.displayName,
     
           type: "text",
         });
@@ -38,9 +39,9 @@ const Chat = () => {
       return  <Navigate to="/auth" />
       }
   return (
-    <Container border="1px solid black" my="5" p="5"  maxW={"container.lg"}  >
-  <Box h="full" bg={"gray.300"} w={["100%","60%"]} mx="auto" flex="1" p={4} overflow="hidden" position="relative">
-  <Text fontSize="xl" fontFamily={"poppins"} fontWeight="bold" mb={4}>{selectedRoom}</Text>
+    <Container  my="5" maxW={"container.lg"}  >
+  <Box borderRadius={"lg"} h="full" bg={"gray.300"} w={["100%","60%"]} mx="auto" flex="1" p={4} overflow="hidden" position="relative">
+  <Heading textAlign={"end"} fontSize="xl" fontFamily={"poppins"} fontWeight="bold" mb={4}>{selectedRoom}</Heading>
     <VStack p="2" maxH={"70vh"} className="chat-comp"  overflowY="scroll" spacing={2} >
      
         
@@ -54,7 +55,7 @@ const Chat = () => {
         
      
     </VStack>
-     <MyInput handleSendMessage={handleSendMessage} InputRef={InputRef} />
+     <MyInput  handleSendMessage={handleSendMessage} InputRef={InputRef} />
   </Box>
   
 

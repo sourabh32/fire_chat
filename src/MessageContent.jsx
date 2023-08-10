@@ -1,11 +1,24 @@
 import { Box, Image, Text } from "@chakra-ui/react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { userContext } from "./contexts/UserContext";
-
+import sent from "./assets/sent.mp3"
+import recived from "./assets/recived.mp3"
+import { chatContext } from "./contexts/ChatContext";
 const MessageContent = ({ message }) => {
-  const {text,type,displayName} = message
+  const {text,type,sender} = message
     const {user} = useContext(userContext)
-    const isCurrentUser = displayName === user.displayName
+   const {messages} = useContext(chatContext)
+    const isCurrentUser = sender === user.displayName
+       
+    const playSound = (voice) => {
+        let audio = new Audio(voice);
+        audio.play();
+      };
+      
+      useEffect(()=>{
+  playSound(sent)
+      },[isCurrentUser])
+  
   return (
     <Box
     fontFamily={"nunito sans"}

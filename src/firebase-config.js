@@ -28,19 +28,3 @@ export const db = getFirestore(app)
 
 export const storage = new getStorage(app)
 
-
- export const uploadImageToFirebaseStorage = async (imageFile) => {
-  try {
-    const storageRef = ref(storage, `images/${imageFile.name}`);
-    await uploadBytes(storageRef, imageFile);
-
-   
-    const imageUrl = await getDownloadURL(storageRef);
-     console.log("added")
-    return imageUrl;
-  } catch (error) {
-    console.error('Error uploading image:', error);
-    throw error; // Rethrow the error for handling in the calling code
-  }
-
-}

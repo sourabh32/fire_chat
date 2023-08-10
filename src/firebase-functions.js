@@ -1,8 +1,9 @@
 import { signInWithPopup, signOut } from "firebase/auth";
-import { auth, db, provider } from "./firebase-config";
-import { doc, getDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import { auth, db, provider, storage } from "./firebase-config";
+import { addDoc, doc, getDoc, onSnapshot, serverTimestamp, setDoc, updateDoc } from "firebase/firestore";
 import { useContext } from "react";
 import { userContext } from "./contexts/UserContext";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export const logOut = async () => {
   try {
@@ -89,4 +90,37 @@ export const fetchUserFromFirestore = async (uid,setUser) => {
   } catch (error) {
     console.log("User document does not exist.");
   }
+};
+
+
+ const uploadImageToFirebaseStorage = async (imageFile) => {
+  try {
+    const storageRef = ref(storage, `images/${imageFile.name}`);
+    await uploadBytes(storageRef, imageFile);
+
+   
+    const imageUrl = await getDownloadURL(storageRef);
+     console.log("added")
+    return imageUrl;
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    throw error; // Rethrow the error for handling in the calling code
+  }
+
+}
+
+ export const uploadImage = async (selectedImage,user,message,messageRef) => {
+  
+  const imgUrl = await uploadImageToFirebaseStorage(selectedImage)
+    
+    
+    await addDoc(messageRef,{
+      text:message,
+      createdAt:serverTimestamp(),
+      user:user.displayName,
+      
+     type:"img",
+     imgUrl
+     })
+     
 };

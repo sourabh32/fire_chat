@@ -1,7 +1,8 @@
 
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { db } from "../firebase-config";
+
 
 
 
@@ -13,8 +14,10 @@ export const chatContext = createContext()
 export const ChatProvider = ({children})=>{
     const [selectedRoom,setSelectedRoom] = useState("undefined")
     const [messages,setMessages] = useState([])
+    
     const messageRef = collection(db,selectedRoom)
-
+    
+ 
 
     useEffect(()=>{
         if(selectedRoom !== "undefined"){
