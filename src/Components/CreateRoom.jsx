@@ -46,7 +46,7 @@ const CreateRoom = ({user}) =>{
         
         <Popover  placement="bottom">
           <PopoverTrigger>
-          <IconButton target='_blank'  aria-label="Facebook" icon={<IoMdAddCircleOutline />} size="md" variant="outline" colorScheme="blue" />
+          <IconButton target='_blank'  aria-label="Facebook" icon={<IoMdAddCircleOutline />} size="md" variant="outline" color="blackAlpha.800" />
           </PopoverTrigger>
           <PopoverContent maxW={{ base: '250px', md: '300px' }} p={4} bg="white">
             <PopoverArrow />

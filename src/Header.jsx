@@ -16,7 +16,7 @@ function Header() {
       <Link to="/auth">
         {
           user ? (<HStack>
-            <Image src={user.photoURL}></Image>
+            <Image  w={5} h={5} borderRadius={"full"} src={user.photoURL}></Image>
           <Text >{user.displayName.slice(0,5)}...</Text>
           </HStack>):(<Button variant={"link"} colorScheme="whiteAlpha">Sign In</Button>)
         }

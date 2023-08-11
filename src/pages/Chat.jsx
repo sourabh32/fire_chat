@@ -1,4 +1,4 @@
-import { Box, Button, Input, VStack ,Text, Container, Flex, Heading, HStack} from '@chakra-ui/react'
+import { Box, Button, Input, VStack ,Text, Container, Flex, Heading, HStack, IconButton} from '@chakra-ui/react'
 import React, { useContext, useEffect, useRef } from 'react'
 import { chatContext } from '../contexts/ChatContext'
 import { addDoc, serverTimestamp } from 'firebase/firestore'
@@ -7,13 +7,21 @@ import MessageContent from '../MessageContent'
 import MyInput from '../Components/MyInput'
 import { Link, Navigate } from 'react-router-dom'
 import {GrPrevious} from "react-icons/gr"
+import {BsShare} from "react-icons/bs"
 const Chat = () => {
     const {selectedRoom,messageRef,messages} = useContext(chatContext)
     const {user} = useContext(userContext)
     console.log("render");
     const InputRef = useRef("");
     const messagesEndRef = useRef(null);
-    
+    const handleShareClick = (event,chatID) => {
+      event.stopPropagation();
+      
+      const whatsappMessage = 'Join our chat room. Room ID : ' + chatID ;
+  
+      
+      window.open(`https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`);
+    };
 
     useEffect(() => {
      
@@ -41,10 +49,20 @@ const Chat = () => {
   return (
     <Container  my="5" maxW={"container.lg"}  >
   <Box borderRadius={"lg"} h="full" bg={"gray.300"} w={["100%","60%"]} mx="auto" flex="1" p={4} overflow="hidden" position="relative">
-    <HStack justifyContent={"space-between"}>
+    <HStack alignItems={"center"} justifyContent={"space-between"}>
   <Link to="/"><GrPrevious /></Link>
-  <Heading textAlign={"end"} fontSize="xl" fontFamily={"poppins"} fontWeight="bold" mb={4}>{selectedRoom}</Heading>
+  <Heading textAlign={"end"} fontSize="xl" fontFamily={"poppins"} fontWeight="bold" >{selectedRoom}</Heading>
+  <IconButton
+    alignSelf={"flex-end"}
+    icon={<BsShare />}
+    onClick={(event) => handleShareClick(event, selectedRoom)}
+    mt={2}
+    size={"sm"}
+    aria-label="Share via WhatsApp"
+    colorScheme="gray"
+  />
   </HStack>
+
     <VStack p="2" maxH={"70vh"} className="chat-comp"  overflowY="scroll" spacing={2} >
      
         

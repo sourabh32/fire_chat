@@ -47,7 +47,9 @@ function HomePage() {
   </VStack>
   <Box my="10"
   p="5"
+  color="white"
   w="100%" border="2px solid #ccc" borderRadius="md"
+  bg={"#445069"}
   >
     <Heading fontFamily={"bebas neue"} textAlign={"center"} my="5" size="md">Saved Room's</Heading>
     {
