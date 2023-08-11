@@ -24,10 +24,10 @@ return (
   <BrowserRouter>
   <Header />
   <Routes>
-    <Route path ="/" element={<AuthenticationPage />} />
+    <Route path ="/auth" element={<AuthenticationPage />} />
   
     <Route path ="/room/:id" element={<Chat />} />
-    <Route path ="/auth" element={<HomePage />} />
+    <Route path ="/" element={<HomePage />} />
    
   </Routes>
   </BrowserRouter>

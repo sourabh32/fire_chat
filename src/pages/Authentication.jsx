@@ -13,12 +13,14 @@ import {
 } from '@chakra-ui/react';
 import { logOut, signInWithGoogle } from '../firebase-functions';
 import { userContext } from '../contexts/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 function AuthenticationPage() {
   const {user}  = useContext(userContext)
-
+const navigate = useNavigate()
   const handleSignInGoogle = async () => {
     await signInWithGoogle()
+    navigate("/")
   };
 
   const handleSignOut = async () => {

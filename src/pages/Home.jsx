@@ -9,6 +9,7 @@ import {
   Text,
   Input,
   HStack,
+  Heading,
 } from "@chakra-ui/react";
 import { userContext } from "../contexts/UserContext";
 import { chatContext } from "../contexts/ChatContext";
@@ -36,19 +37,25 @@ function HomePage() {
  
 
   return (
-    <Container p="10" maxW="container.lg">
-   
+    <Container fontFamily={"nunito sans"} p="10" maxW="container.lg">
+      
+      <Heading fontFamily={"bebas neue"} textAlign={"center"} my="5" size="md">Experience Lightning-Fast Chats: 50% Quicker, 100% Seamless</Heading>
       <VStack  justifyContent={"center"} 
       alignItems={"center"} w="100%" height={["15vh","25vh"]} border="2px dashed #ccc" borderRadius="md">
-      <Text>Add Room</Text>
+      <Heading size="md" fontFamily="bebas neue">Add Room</Heading>
    <CreateRoom user={user} />
   </VStack>
   <Box my="10"
   p="5"
   w="100%" border="2px solid #ccc" borderRadius="md"
   >
-    <Text textAlign={"center"}>Previous Room's</Text>
-    <RoomsContainer user={user} />
+    <Heading fontFamily={"bebas neue"} textAlign={"center"} my="5" size="md">Saved Room's</Heading>
+    {
+      user ? (<RoomsContainer user={user} />):(<Text textAlign={"center"}>
+        Sign In to Save Room's!
+      </Text>)
+    }
+    
 
   </Box>
      

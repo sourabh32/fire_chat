@@ -1,12 +1,12 @@
-import { Box, Button, Input, VStack ,Text, Container, Flex, Heading} from '@chakra-ui/react'
+import { Box, Button, Input, VStack ,Text, Container, Flex, Heading, HStack} from '@chakra-ui/react'
 import React, { useContext, useEffect, useRef } from 'react'
 import { chatContext } from '../contexts/ChatContext'
 import { addDoc, serverTimestamp } from 'firebase/firestore'
 import { userContext } from '../contexts/UserContext'
 import MessageContent from '../MessageContent'
 import MyInput from '../Components/MyInput'
-import { Navigate } from 'react-router-dom'
-
+import { Link, Navigate } from 'react-router-dom'
+import {GrPrevious} from "react-icons/gr"
 const Chat = () => {
     const {selectedRoom,messageRef,messages} = useContext(chatContext)
     const {user} = useContext(userContext)
@@ -41,7 +41,10 @@ const Chat = () => {
   return (
     <Container  my="5" maxW={"container.lg"}  >
   <Box borderRadius={"lg"} h="full" bg={"gray.300"} w={["100%","60%"]} mx="auto" flex="1" p={4} overflow="hidden" position="relative">
+    <HStack justifyContent={"space-between"}>
+  <Link to="/"><GrPrevious /></Link>
   <Heading textAlign={"end"} fontSize="xl" fontFamily={"poppins"} fontWeight="bold" mb={4}>{selectedRoom}</Heading>
+  </HStack>
     <VStack p="2" maxH={"70vh"} className="chat-comp"  overflowY="scroll" spacing={2} >
      
         

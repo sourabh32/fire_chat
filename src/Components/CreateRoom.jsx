@@ -29,10 +29,17 @@ const CreateRoom = ({user}) =>{
     const InputRef = useRef("")
     const navigate = useNavigate()
     const handleRoomSubmit = async () =>{
+      if(user){
         const val = InputRef.current.value
+        if(val === ""){
        setSelectedRoom(val)
        navigate(`/room/${val}`)
         await handleAddRoom(val,user.uid)
+        }
+      }
+      else{
+        navigate("/auth")
+      }
       }
     return(
      
