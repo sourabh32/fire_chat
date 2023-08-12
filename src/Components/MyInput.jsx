@@ -15,11 +15,12 @@ const MyInput = ({handleSendMessage,InputRef}) => {
         py={2}
         px={4}
         rounded="full"
-        bg="gray.100"
+        
+        bg="#f5f5f5"
         placeholder="Type your message..."
       
       />
-        <IconButton borderRadius={"full"}   aria-label="Facebook" icon={<AiFillMessage />} onClick={handleSendMessage} size="sm" variant="outline" colorScheme="blue" />
+        <IconButton borderRadius={"full"}   aria-label="Facebook" icon={<AiFillMessage />} onClick={handleSendMessage} size="sm" variant="outline" colorScheme="gray" />
       <ImgBtn borderRadius={"4"} message={InputRef.current.value} />
     
       

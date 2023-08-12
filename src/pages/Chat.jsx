@@ -48,7 +48,7 @@ const Chat = () => {
       }
   return (
     <Container  my="5" maxW={"container.lg"}  >
-  <Box borderRadius={"lg"} h="full" bg={"gray.300"} w={["100%","60%"]} mx="auto" flex="1" p={4} overflow="hidden" position="relative">
+  <Box borderRadius={"lg"} h="full" bg={"#D8D9DA"} w={["100%","60%"]} mx="auto" flex="1" p={4} overflow="hidden" position="relative">
     <HStack alignItems={"center"} justifyContent={"space-between"}>
   <Link to="/"><GrPrevious /></Link>
   <Heading textAlign={"end"} fontSize="xl" fontFamily={"poppins"} fontWeight="bold" >{selectedRoom}</Heading>
@@ -63,7 +63,7 @@ const Chat = () => {
   />
   </HStack>
 
-    <VStack p="2" maxH={"70vh"} className="chat-comp"  overflowY="scroll" spacing={2} >
+    <VStack p="2" h={"70vh"} className="chat-comp"  overflowY="scroll" spacing={2} >
      
         
        

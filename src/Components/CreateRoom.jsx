@@ -31,7 +31,7 @@ const CreateRoom = ({user}) =>{
     const handleRoomSubmit = async () =>{
       if(user){
         const val = InputRef.current.value
-        if(val === ""){
+        if(val !== ""){
        setSelectedRoom(val)
        navigate(`/room/${val}`)
         await handleAddRoom(val,user.uid)
@@ -63,7 +63,7 @@ const CreateRoom = ({user}) =>{
                     mb={2}
                   />
                 
-                <Button  onClick={handleRoomSubmit} colorScheme="teal" size="sm">
+                <Button  onClick={handleRoomSubmit} colorScheme="gray" size="sm">
                   Enter Room
                 </Button>
                 </VStack>

@@ -29,7 +29,7 @@ const {messageRef} = useContext(chatContext)
   return (
     <Popover placement='top'  isOpen={isPopoverOpen} onOpen={() => setIsPopoverOpen(true)} onClose={() => setIsPopoverOpen(false)}>
       <PopoverTrigger>
-      <IconButton target='_blank' borderRadius={"full"}  aria-label="Facebook" icon={<FaImage />} size="sm" variant="outline" colorScheme="blue" />
+      <IconButton target='_blank' borderRadius={"full"}  aria-label="Facebook" icon={<FaImage />} size="sm" variant="outline" colorScheme="gray" />
         
       </PopoverTrigger>
       <PopoverContent maxW={{ base: '250px', md: '300px' }}>

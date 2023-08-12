@@ -22,7 +22,7 @@ const RoomsContainer = ({user}) => {
         window.open(`https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`);
       };
   return (
-    <Stack  flexDirection={["column","row"]} spacing={4} p={2} overflowX="auto">
+    <Stack className='rooms-container'  flexDirection={["column","row"]} spacing={4} p={2} overflowX="auto">
       { user && user.chatRooms.map((chat, index) => (
    
    <Box

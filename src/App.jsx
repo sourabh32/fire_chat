@@ -1,20 +1,15 @@
-import { useContext, useRef, useState } from "react"
-import Auth from "./Auth"
 
-import Chat from "./pages/Chat"
-import { userContext } from "./contexts/UserContext"
-import { handleAddRoom, logOut } from "./firebase-functions"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import AuthenticationPage from "./pages/Authentication"
+
 import Header from "./Header"
 import HomePage from "./pages/Home"
-import ChatProvider from "./contexts/ChatContext"
+import AuthenticationPage from "./pages/Authentication"
+import Chat from "./pages/Chat"
+
 
 
 function App() {
-const {user} = useContext(userContext)
 
-console.log(user)
 
 // const InputRef = useRef(null)
 
