@@ -1,10 +1,13 @@
-
+import React from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-
 import Header from "./Header"
-import HomePage from "./pages/Home"
-import AuthenticationPage from "./pages/Authentication"
-import Chat from "./pages/Chat"
+import { Suspense } from "react"
+import LazyLoder from "./Components/LazyLoder"
+
+const HomePage  = React.lazy(()=> import("./pages/Home"))
+const Chat = React.lazy(()=> import("./pages/Chat"))
+const AuthenticationPage = React.lazy(()=> import("./pages/Authentication"))
+
 
 
 
@@ -18,13 +21,16 @@ function App() {
 return (
   <BrowserRouter>
   <Header />
+  <Suspense fallback={<LazyLoder />}>
   <Routes>
+  
     <Route path ="/auth" element={<AuthenticationPage />} />
   
     <Route path ="/room/:id" element={<Chat />} />
     <Route path ="/" element={<HomePage />} />
    
   </Routes>
+  </Suspense>
   </BrowserRouter>
 )
   
