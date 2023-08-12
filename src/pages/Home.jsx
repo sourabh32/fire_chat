@@ -4,25 +4,26 @@ import { userContext } from "../contexts/UserContext";
 import CreateRoom from "../Components/CreateRoom";
 import RoomsContainer from "../Components/RoomsContainer";
 
+import MyHeading from "../Components/MyHeading";
+
 function HomePage() {
   const { user } = useContext(userContext);
 
   return (
     <Container fontFamily={"nunito sans"} p="10" maxW="container.lg">
-      <Heading fontFamily={"bebas neue"} textAlign={"center"} my="5" size="md">
-        Experience Lightning-Fast Chats: 50% Quicker, 100% Seamless
-      </Heading>
+     <MyHeading text={"Experience Lightning-Fast Chats: 50% Quicker, 100% Seamless"} />
+        
+      
       <VStack
         justifyContent={"center"}
         alignItems={"center"}
         w="100%"
-        height={["15vh", "25vh"]}
+        height={"30vh"}
         border="2px dashed #ccc"
         borderRadius="md"
       >
-        <Heading size="md" fontFamily="bebas neue">
-          Add Room
-        </Heading>
+        <MyHeading text={"Add Room"} />
+        
         <CreateRoom user={user} />
       </VStack>
       <Box
@@ -34,14 +35,7 @@ function HomePage() {
         borderRadius="md"
         bg={"#445069"}
       >
-        <Heading
-          fontFamily={"bebas neue"}
-          textAlign={"center"}
-          my="5"
-          size="md"
-        >
-          Saved Room's
-        </Heading>
+         <MyHeading text={"Saved Room's"} />
         {user ? (
           <RoomsContainer user={user} />
         ) : (

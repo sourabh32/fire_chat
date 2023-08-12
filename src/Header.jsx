@@ -7,7 +7,7 @@ function Header() {
   const {user} = useContext(userContext)
   return (
     <Flex
-    fontFamily="nunito sans"
+    fontFamily="bebas neue"
     h="5vh"
     as="nav"
     align="center"

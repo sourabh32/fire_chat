@@ -1,8 +1,28 @@
 import { Box, Button, HStack, IconButton, Input } from '@chakra-ui/react'
-import React from 'react'
+import React, { useContext, useRef } from 'react'
 import {AiFillMessage} from "react-icons/ai"
 import ImgBtn from './ImgButton'
-const MyInput = ({handleSendMessage,InputRef}) => {
+import { addDoc, serverTimestamp } from 'firebase/firestore'
+import { chatContext } from '../contexts/ChatContext'
+import { userContext } from '../contexts/UserContext'
+const MyInput = () => {
+  const {messageRef,} = useContext(chatContext)
+  const {user} = useContext(userContext)
+ 
+  const InputRef = useRef("");
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+    InputRef.current.focus()
+    await addDoc(messageRef, {
+      text: InputRef.current.value,
+      createdAt: serverTimestamp(),
+      sender: user.displayName,
+
+      type: "text",
+    });
+    InputRef.current.value = "";
+    InputRef.current.focus()
+  };
     
   return (
     
