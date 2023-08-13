@@ -6,7 +6,7 @@ import {
   Button,
   Container,
   Heading,
-  Avatar,
+  
   Text,
   VStack,
   Image,
@@ -14,17 +14,20 @@ import {
 import { logOut, signInWithGoogle } from '../firebase-functions';
 import { userContext } from '../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 function AuthenticationPage() {
   const {user}  = useContext(userContext)
 const navigate = useNavigate()
   const handleSignInGoogle = async () => {
     await signInWithGoogle()
+    toast.success("sign in sucsessfully")
     navigate("/")
   };
 
   const handleSignOut = async () => {
    await logOut()
+   toast.success("logged out sucsessfully")
   };
 
   return (
@@ -72,29 +75,7 @@ const navigate = useNavigate()
     }
     
   </Container>
-    // <Container maxW="container.sm">
-    //   <Box p={8} borderWidth={1} borderRadius="lg">
-    //     <VStack spacing={4}>
-    //       <Heading as="h1" size="lg">
-    //         Authentication Page
-    //       </Heading>
-    //       {user ? (
-    //         <Box>
-    //           <Avatar size="xl" src={user.photoURL} alt="User Avatar" />
-    //           <Text>{user.displayName}</Text>
-    //           <Text>{user.email}</Text>
-    //           <Button onClick={handleSignOut} colorScheme="red">
-    //             Sign Out
-    //           </Button>
-    //         </Box>
-    //       ) : (
-    //         <Button onClick={handleSignIn} colorScheme="blue">
-    //           Sign In with Google
-    //         </Button>
-    //       )}
-    //     </VStack>
-    //   </Box>
-    // </Container>
+ 
   );
 }
 

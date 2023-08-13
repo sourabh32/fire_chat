@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Header from "./Header"
 import { Suspense } from "react"
 import LazyLoder from "./Components/LazyLoder"
+import { Toaster } from "react-hot-toast"
 
 const HomePage  = React.lazy(()=> import("./pages/Home"))
 const Chat = React.lazy(()=> import("./pages/Chat"))
@@ -20,6 +21,7 @@ function App() {
 
 return (
   <BrowserRouter>
+  <Toaster />
   <Header />
   <Suspense fallback={<LazyLoder />}>
   <Routes>

@@ -1,4 +1,4 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, VStack,Text } from '@chakra-ui/react';
 import React, { useContext, useEffect, useRef } from 'react'
 import { chatContext } from '../contexts/ChatContext';
 import MessageContent from '../MessageContent';
@@ -27,11 +27,14 @@ const ScrollableChats = () => {
         
        
       
-        {messages.length > 0 &&
+        {messages.length > 0 ?(<>{
           messages.map((message) => (
             <MessageContent key={message.id} message={message}/> 
           ))}
           <Box ref={messagesEndRef} />
+          </>):(<Text fontFamily={"nunito sans"}>
+            Share roomId with friends to start chating!
+          </Text>)}
         
      
     </VStack>

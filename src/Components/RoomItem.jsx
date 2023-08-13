@@ -4,8 +4,14 @@ import { chatContext } from '../contexts/ChatContext'
 import { useNavigate } from 'react-router-dom'
 import { Box } from '@chakra-ui/react'
 import ShareIcon from './ShareIcon'
-
-
+import { toast } from 'react-hot-toast'
+import { motion } from 'framer-motion'
+const AnimatedBox = motion(Box)
+ 
+const variants = {
+  hidden: { opacity: 0, y: -20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, type: 'spring', damping: 10 } },
+};
 const RoomItem = ({chat}) => {
 
     const {setSelectedRoom}  = useContext(chatContext)
@@ -13,10 +19,14 @@ const RoomItem = ({chat}) => {
     const handleRoomClick = (room) => {
         setSelectedRoom(room);
         navigate(`/room/${room}`)
+        toast.success(`${room} room joined!`)
         
       };
   return (
-    <Box
+    <AnimatedBox
+    initial="hidden"
+      animate="visible"
+      variants={variants}
    onClick={() => handleRoomClick(chat)}
    minH={'150px'}
    minW={'150px'}
@@ -36,7 +46,7 @@ const RoomItem = ({chat}) => {
  >
     <ShareIcon chat={chat} />
     {chat.toUpperCase()}
- </Box>
+ </AnimatedBox>
   )
 }
 

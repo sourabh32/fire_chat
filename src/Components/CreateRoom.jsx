@@ -20,6 +20,7 @@ import {
     
   } from '@chakra-ui/react';
 import {IoMdAddCircleOutline} from "react-icons/io"
+import { toast } from "react-hot-toast";
 
 
 const CreateRoom = ({user}) =>{ 
@@ -34,6 +35,7 @@ const CreateRoom = ({user}) =>{
         if(val !== ""){
        setSelectedRoom(val)
        navigate(`/room/${val}`)
+       toast.success(`${val} room joined!`)
         await handleAddRoom(val,user.uid)
         }
       }

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Flex, Heading, Button, Text, HStack, Image } from '@chakra-ui/react';
 import { userContext } from './contexts/UserContext';
-
+import {BsFire} from "react-icons/bs"
 function Header() {
   const {user} = useContext(userContext)
   return (
@@ -13,7 +13,6 @@ function Header() {
     align="center"
     justify="space-between"
     p={4}
-   
     color="blackAlpha.800"
     position="fixed" 
     top={0}
@@ -22,9 +21,13 @@ function Header() {
     zIndex={1000} 
   >
     <Link to="/">
-      <Box display="flex" alignItems="center">
-        <Heading size="md">FireChat</Heading>
-      </Box>
+      
+        <HStack color={"#F94C10"} alignContent={"center"} >
+        <Heading  fontFamily={ "bebas neue"} size="md">FireChat </Heading>
+        <BsFire /> 
+        </HStack>
+       
+    
     </Link>
     <Link to="/auth">
       {user ? (

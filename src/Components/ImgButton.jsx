@@ -22,8 +22,10 @@ const {messageRef} = useContext(chatContext)
     console.log(selectedImage)
     await uploadImage(selectedImage,user,message,messageRef)
     setUploading(false)
+
     setSelectedImage(null)
     setIsPopoverOpen(false)
+    
   }
 
   return (

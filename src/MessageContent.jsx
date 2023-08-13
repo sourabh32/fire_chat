@@ -1,8 +1,9 @@
 import { Box, Image, Text } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { userContext } from "./contexts/UserContext";
+import { motion } from "framer-motion";
 
-
+const AnimatedBox = motion(Box)
 
 const MessageContent = ({ message }) => {
   const {text,type,sender} = message
@@ -11,9 +12,15 @@ const MessageContent = ({ message }) => {
     const isCurrentUser = sender === user.displayName
        
     
-  
+    const variants = {
+      hidden: { opacity: 0, y: -20 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.5, type: 'spring', damping: 10 } },
+    };
   return (
-    <Box
+    <AnimatedBox
+    initial="hidden"
+      animate="visible"
+      variants={variants}
     fontFamily={"nunito sans"}
     fontWeight={"bold"}
  p="2"
@@ -35,7 +42,7 @@ const MessageContent = ({ message }) => {
   <Text textAlign={"center"} fontSize="0.8rem" flexGrow={1} >
     {text}
   </Text>
-</Box>
+</AnimatedBox>
 
 
   );
